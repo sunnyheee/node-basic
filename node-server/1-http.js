@@ -18,8 +18,29 @@ const server = http.createServer((req, res) => {
   // 반응처리
   // 언어처리
   res.writeHead(200, { "content-Type": "text/html; charset=utf-8" });
-  res.write("English 한글입니다 日本語です");
+  const url = req.url;
+  if (url === "/") {
+    // HTML 만들기
+    // 위에 writeHead에서 언어처리 하면서 html로 만들고 있기때문에 따로 설정 안해도 됨
+    // res.setHeader("Content-Type", "text/html");
+    res.write("<html>");
+    res.write("<head><title>Create HTML</title></head>");
+    res.write("<body><h1>Node HTML!!</h1></body>");
+    res.write("</html>");
+    res.write("English 한글입니다 日本語です");
+  } else if (url === "/course") {
+    res.write("<html>");
+    res.write("<head><title>Create HTML</title></head>");
+    res.write("<body><h1>Node Course!!</h1></body>");
+    res.write("</html>");
+  } else {
+    res.write("<html>");
+    res.write("<head><title>Create HTML</title></head>");
+    res.write("<body><h1>Node Not found!!</h1></body>");
+    res.write("</html>");
+  }
   res.end();
 });
+
 // 서버포트를 정해줘야한다
 server.listen(8080);
